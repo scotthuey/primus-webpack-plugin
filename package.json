@@ -26,6 +26,6 @@
   },
   "peerDependencies": {
     "primus": "^6.1.0",
-    "webpack": "^2.0.0"
+    "webpack": "^5.0.0"
   }
 }
