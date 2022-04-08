@@ -23,7 +23,6 @@
   },
   "homepage": "https://github.com/kkemple/primus-webpack-plugin#readme",
   "dependencies": {
-    "uglify-js": "^3.13.4"
   },
   "peerDependencies": {
     "primus": "^6.1.0",

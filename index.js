@@ -1,7 +1,6 @@
 const EventEmitter = require('events');
 const assert = require('assert');
 const Primus = require('primus');
-const uglify = require('uglify-js');
 
 class PrimusWebpackPlugin {
   constructor(options) {
@@ -17,7 +16,7 @@ class PrimusWebpackPlugin {
   }
 
   apply(compiler) {
-    compiler.plugin('emit', (compilation, cb) => {
+    compiler.hooks.emit.tapAsync('PrimusWebpackPlugin', (compilation, cb) => {
       const primus = new Primus(new EventEmitter(), this.options.primusOptions);
 
       if (this.options.primusOptions.plugins) {
@@ -52,8 +51,8 @@ class PrimusWebpackPlugin {
     });
 
     // if HtmlWebpackPlugin is being utilized, add our script to file
-    compiler.plugin('compilation', compilation => {
-      compilation.plugin(
+    compiler.hooks.compilation.tap('PrimusWebpackPlugin', compilation => {
+      compiler.hooks.compile.tap(
         'html-webpack-plugin-before-html-processing',
         (htmlPluginData, cb) => {
           const filename = this.options.filename.replace(
